@@ -38,7 +38,7 @@ class ShowAutoParksView(GenericAPIView):
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 
-class UsersCreateView(ListCreateAPIView):
+class UsersListCreateView(ListCreateAPIView):
     serializer_class = UserSerializer
     queryset = UserModel.objects.all()
     permission_classes = (IsSuperUser,)
