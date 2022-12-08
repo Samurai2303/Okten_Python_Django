@@ -1,11 +1,4 @@
-from typing import Type
-
-from django.contrib.auth import get_user_model
 from django.db import models
-
-from apps.users.models import UserModel as User
-
-UserModel: Type[User] = get_user_model()
 
 
 class AutoParkModel(models.Model):
@@ -13,4 +6,5 @@ class AutoParkModel(models.Model):
         db_table = 'auto_parks'
 
     name = models.CharField(max_length=15)
-    user = models.ForeignKey(UserModel, on_delete=models.CASCADE, related_name='auto_parks')
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)

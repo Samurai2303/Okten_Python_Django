@@ -1,8 +1,8 @@
 from django.urls import path
 
-from .views import AutoParkByIdView, AutoParksListCreateView
+from .views import AutoParkByIdView, AutoParksListCreateAPIView
 
 urlpatterns = [
-    path('', AutoParksListCreateView.as_view()),
+    path('', AutoParksListCreateAPIView.as_view()),
     path('/<int:pk>', AutoParkByIdView.as_view())
 ]

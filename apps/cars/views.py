@@ -1,16 +1,24 @@
-from rest_framework_simplejwt.authentication import JWTAuthentication
-
 from rest_framework.generics import ListAPIView, RetrieveUpdateDestroyAPIView
-from rest_framework.permissions import IsAuthenticated
 
-from .models import CarModel
-from .serializers import CarSerializer
+from apps.cars.models import CarModel
+from apps.cars.serializers import CarSerializer
 
 
-class CarsListView(ListAPIView):
-    serializer_class = CarSerializer
-    queryset = CarModel.objects.all()
-
-class CarByIdView(RetrieveUpdateDestroyAPIView):
+class CarsListAPIView(ListAPIView):
     queryset = CarModel.objects.all()
     serializer_class = CarSerializer
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+
+        query_params = self.request.query_params.dict()
+        auto_park_id = query_params.get('auto_park_id')
+        if auto_park_id:
+            print(auto_park_id)
+            queryset = queryset.filter(auto_park=auto_park_id)
+        return queryset
+
+
+class CarRetrieveUpdateDestroyAPIView(RetrieveUpdateDestroyAPIView):
+    serializer_class = CarSerializer
+    queryset = CarModel.objects.all()

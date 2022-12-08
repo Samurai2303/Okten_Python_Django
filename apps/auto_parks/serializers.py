@@ -10,4 +10,4 @@ class AutoParkSerializer(ModelSerializer):
 
     class Meta:
         model = AutoParkModel
-        fields = ('id', 'name', 'cars')
+        fields = '__all__'
