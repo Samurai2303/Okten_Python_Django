@@ -2,7 +2,7 @@ from typing import Type
 
 from django.contrib.auth import get_user_model
 from django.db import transaction
-
+from core.services.email_service import EmailService
 from rest_framework.serializers import ModelSerializer
 
 from apps.auto_parks.serializers import AutoParkSerializer
@@ -40,6 +40,7 @@ class UserSerializer(ModelSerializer):
         profile = validated_data.pop('profile')
         user = UserModel.objects.create_user(**validated_data)
         ProfileModel.objects.create(**profile, user=user)
+        EmailService.create_user(user)
         return user
 
 
