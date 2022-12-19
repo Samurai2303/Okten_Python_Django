@@ -69,7 +69,7 @@ class AddAutoParkView(GenericAPIView):
     def get(self, *args, **kwargs):
         user = self.request.user
         serializer = UserSerializer(user)
-        return Response(serializer.data.auto_parks, status=status.HTTP_200_OK)
+        return Response(serializer.data['auto_parks'], status=status.HTTP_200_OK)
 
     def post(self, *args, **kwargs):
         user = self.request.user
@@ -93,3 +93,22 @@ class AddPhotosToProfileView(GenericAPIView):
             serializer.save(profile=profile)
         serializer = ProfileSerializer(profile)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+    def get(self, *args, **kwargs):
+        qs = self.queryset.filter(profile_id=self.request.user.profile.id)
+        serializer = UserPhotosSerializer(qs, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+class UpdateUserProfileView(GenericAPIView):
+    serializer_class = ProfileSerializer
+    queryset = UserModel.objects.all()
+
+    def patch(self, *args, **kwargs):
+        user = self.get_object()
+        data = self.request.data
+        serializer = self.serializer_class(user.profile, data, partial=True)
+        serializer.is_valid(raise_exception=True)
+        serializer.save(user=user)
+        serializer = UserSerializer(user)
+        return Response(serializer.data, status=status.HTTP_200_OK)

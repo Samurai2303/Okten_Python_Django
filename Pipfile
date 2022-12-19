@@ -10,6 +10,8 @@ django-cors-headers = "*"
 djangorestframework-simplejwt = "*"
 pillow = "*"
 django-dotenv = "*"
+colorama = "*"
+django-filter = "*"
 
 [dev-packages]
 isort = "*"

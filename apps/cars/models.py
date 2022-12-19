@@ -13,6 +13,7 @@ class CarModel(models.Model):
     brand = models.CharField(max_length=15)
     model = models.CharField(max_length=15, unique=True)
     body = models.CharField(max_length=12)
+    price = models.IntegerField(default=5000)
     year = models.IntegerField()
     seats_count = models.IntegerField()
     engine_volume = models.FloatField()

@@ -2,11 +2,12 @@ from typing import Type
 
 from django.contrib.auth import get_user_model
 from django.db import transaction
-from core.services.email_service import EmailService
+
 from rest_framework.serializers import ModelSerializer
 
 from apps.auto_parks.serializers import AutoParkSerializer
 from apps.users.models import UserModel as User
+from core.services.email_service import EmailService
 
 from .models import ProfileModel, UserPhotosModel
 
@@ -16,7 +17,8 @@ UserModel: Type[User] = get_user_model()
 class ProfileSerializer(ModelSerializer):
     class Meta:
         model = ProfileModel
-        fields = ('name', 'surname', 'age', 'phone')
+        fields = ('name', 'surname', 'age', 'phone', 'photos')
+        read_only_fields = ('photos',)
 
 
 class UserSerializer(ModelSerializer):
