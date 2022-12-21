@@ -1,9 +1,8 @@
+from apps.cars.serializers import CarSerializer
 from rest_framework import status
 from rest_framework.generics import GenericAPIView, ListAPIView, RetrieveUpdateDestroyAPIView
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
-
-from apps.cars.serializers import CarSerializer
 
 from .filters import AutoParkFilters
 from .models import AutoParkModel

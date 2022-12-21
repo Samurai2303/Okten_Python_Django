@@ -2,9 +2,8 @@ from typing import Type
 
 from django.contrib.auth import get_user_model
 
-from rest_framework.serializers import ModelSerializer
-
 from apps.users.models import UserModel as User
+from rest_framework.serializers import ModelSerializer
 
 UserModel: Type[User] = get_user_model()
 

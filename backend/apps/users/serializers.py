@@ -3,11 +3,10 @@ from typing import Type
 from django.contrib.auth import get_user_model
 from django.db import transaction
 
-from rest_framework.serializers import ModelSerializer
-
 from apps.auto_parks.serializers import AutoParkSerializer
 from apps.users.models import UserModel as User
 from core.services.email_service import EmailService
+from rest_framework.serializers import ModelSerializer
 
 from .models import ProfileModel, UserPhotosModel
 

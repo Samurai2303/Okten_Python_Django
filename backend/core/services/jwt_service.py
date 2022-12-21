@@ -1,10 +1,12 @@
-from rest_framework_simplejwt.tokens import BlacklistMixin, Token
-from core.enums.action_enum import ActionEnum
 from typing import Type
+
 from django.contrib.auth import get_user_model
+
 from apps.users.models import UserModel as User
-from rest_framework.generics import get_object_or_404
+from core.enums.action_enum import ActionEnum
 from core.exceptions.jwt_exception import JWTException
+from rest_framework.generics import get_object_or_404
+from rest_framework_simplejwt.tokens import BlacklistMixin, Token
 
 UserModel: Type[User] = get_user_model()
 

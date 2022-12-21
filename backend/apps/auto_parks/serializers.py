@@ -1,6 +1,5 @@
-from rest_framework.serializers import ModelSerializer
-
 from apps.cars.serializers import CarSerializer
+from rest_framework.serializers import ModelSerializer
 
 from .models import AutoParkModel
 
@@ -10,4 +9,5 @@ class AutoParkSerializer(ModelSerializer):
 
     class Meta:
         model = AutoParkModel
-        exclude = ('user',)
+        fields = ('id', 'name', 'cars', 'users', 'created_at', 'updated_at')
+        depth = 1

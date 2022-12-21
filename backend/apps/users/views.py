@@ -2,14 +2,13 @@ from typing import Type
 
 from django.contrib.auth import get_user_model
 
+from apps.auto_parks.models import AutoParkModel
+from apps.auto_parks.serializers import AutoParkSerializer
+from apps.users.models import UserModel as User
 from rest_framework import status
 from rest_framework.generics import GenericAPIView, ListCreateAPIView
 from rest_framework.permissions import IsAdminUser
 from rest_framework.response import Response
-
-from apps.auto_parks.models import AutoParkModel
-from apps.auto_parks.serializers import AutoParkSerializer
-from apps.users.models import UserModel as User
 
 from .models import UserPhotosModel
 from .permissions import IsSupereuser
@@ -76,7 +75,9 @@ class AddAutoParkView(GenericAPIView):
         data = self.request.data
         serializer = self.serializer_class(data=data)
         serializer.is_valid(raise_exception=True)
-        serializer.save(user=user)
+        auto_park:AutoParkModel = serializer.save()
+        auto_park.users.add(user)
+        serializer = UserSerializer(user)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 

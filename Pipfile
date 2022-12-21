@@ -9,7 +9,6 @@ mysqlclient = "*"
 django-cors-headers = "*"
 djangorestframework-simplejwt = "*"
 pillow = "*"
-django-dotenv = "*"
 colorama = "*"
 django-filter = "*"
 
@@ -18,4 +17,3 @@ isort = "*"
 
 [requires]
 python_version = "3.11"
-python_full_version = "3.11.0"
