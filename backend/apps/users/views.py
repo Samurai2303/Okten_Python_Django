@@ -75,7 +75,7 @@ class AddAutoParkView(GenericAPIView):
         data = self.request.data
         serializer = self.serializer_class(data=data)
         serializer.is_valid(raise_exception=True)
-        auto_park:AutoParkModel = serializer.save()
+        auto_park: AutoParkModel = serializer.save()
         auto_park.users.add(user)
         serializer = UserSerializer(user)
         return Response(serializer.data, status=status.HTTP_201_CREATED)

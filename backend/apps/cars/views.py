@@ -1,6 +1,7 @@
 from core.pagination.page_pagination import PagePagination
 from rest_framework import status
 from rest_framework.generics import GenericAPIView, ListAPIView, RetrieveUpdateDestroyAPIView
+from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 
 from .filters import CarFilters
@@ -13,6 +14,7 @@ class CarsListView(ListAPIView):
     queryset = CarModel.objects.all()
     pagination_class = PagePagination
     filterset_class = CarFilters
+    permission_classes = (AllowAny,)
 
 
 class CarByIdView(RetrieveUpdateDestroyAPIView):
