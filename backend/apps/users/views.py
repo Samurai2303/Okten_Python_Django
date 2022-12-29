@@ -7,7 +7,7 @@ from apps.auto_parks.serializers import AutoParkSerializer
 from apps.users.models import UserModel as User
 from rest_framework import status
 from rest_framework.generics import GenericAPIView, ListCreateAPIView
-from rest_framework.permissions import IsAdminUser
+from rest_framework.permissions import AllowAny, IsAdminUser
 from rest_framework.response import Response
 
 from .models import UserPhotosModel
@@ -20,7 +20,7 @@ UserModel: Type[User] = get_user_model()
 class UsersListCreateView(ListCreateAPIView):
     serializer_class = UserSerializer
     queryset = UserModel.objects.all()
-    permission_classes = (IsAdminUser,)
+    permission_classes = (AllowAny,)
 
 
 class ToggleActiveView(GenericAPIView):
