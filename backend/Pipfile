@@ -1,0 +1,21 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+djangorestframework = "*"
+mysqlclient = "*"
+django-cors-headers = "*"
+djangorestframework-simplejwt = "*"
+pillow = "*"
+colorama = "*"
+django-filter = "*"
+celery = {extras = ["redis"], version = "*"}
+django-celery-beat = "*"
+
+[dev-packages]
+isort = "*"
+
+[requires]
+python_version = "3.11"

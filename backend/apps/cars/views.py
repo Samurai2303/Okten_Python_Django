@@ -10,6 +10,9 @@ from .serializers import CarPhotosSerializer, CarSerializer
 
 
 class CarsListView(ListAPIView):
+    """
+    List all cars
+    """
     serializer_class = CarSerializer
     queryset = CarModel.objects.all()
     pagination_class = PagePagination
@@ -18,6 +21,17 @@ class CarsListView(ListAPIView):
 
 
 class CarByIdView(RetrieveUpdateDestroyAPIView):
+    """
+    get:
+    Get car by id
+    put:
+    Full update car by id
+    patch:
+    Partial update car by id
+    delete:
+    Delete car by id
+    """
+
     serializer_class = CarSerializer
     queryset = CarModel.objects.all()
 
