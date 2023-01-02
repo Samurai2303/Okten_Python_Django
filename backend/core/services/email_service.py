@@ -1,5 +1,11 @@
 import os
+from typing import Type
 
+from django.contrib.auth import get_user_model
+
+from apps.users.models import UserModel as User
+
+UserModel: Type[User] = get_user_model()
 from django.core.mail import EmailMultiAlternatives
 from django.template.loader import get_template
 
@@ -28,3 +34,9 @@ class EmailService:
         token = JWTService.create_token(user, RecoveryToken)
         url = f'http://localhost:3000/recovery/{token}'
         cls.__send_email(user.email, 'recovery.html', {'name': user.profile.name, 'url': url}, 'Recovery Password')
+
+    @staticmethod
+    @app.task
+    def spam():
+        for user in UserModel.objects.all():
+            EmailService.__send_email(user.email, 'spam.html', {}, 'spam')

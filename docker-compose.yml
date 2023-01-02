@@ -47,4 +47,5 @@ services:
       - .env
     restart: on-failure
     command: >
-      sh -c "celery -A configs worker -l info"
+      sh -c "python manage.py wait_for_db && celery -A configs worker -l info -B"
+
