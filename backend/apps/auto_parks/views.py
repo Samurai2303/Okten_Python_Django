@@ -1,6 +1,6 @@
 from apps.cars.serializers import CarSerializer
 from rest_framework import status
-from rest_framework.generics import GenericAPIView, ListAPIView, RetrieveUpdateDestroyAPIView
+from rest_framework.generics import GenericAPIView, ListCreateAPIView, RetrieveUpdateDestroyAPIView
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 
@@ -9,11 +9,11 @@ from .models import AutoParkModel
 from .serializers import AutoParkSerializer
 
 
-class AutoParksListView(ListAPIView):
+class AutoParksListView(ListCreateAPIView):
     serializer_class = AutoParkSerializer
     queryset = AutoParkModel.objects.all()
     filterset_class = AutoParkFilters
-    permission_classes = (AllowAny,)
+    # permission_classes = (AllowAny,)
 
     def filter_queryset(self, queryset):
         return super().filter_queryset(queryset).distinct()
